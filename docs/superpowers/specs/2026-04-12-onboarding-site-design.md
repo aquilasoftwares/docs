@@ -18,6 +18,7 @@ A static organization onboarding site built with Vite + React 18 + TypeScript. D
 | Vite | Latest |
 | React | 18 |
 | TypeScript | Strict mode |
+| React Router v6 | Client-side routing |
 | shadcn/ui | Component primitives |
 | Tailwind CSS | v3, via shadcn setup |
 | lucide-react | Icons |
@@ -27,12 +28,13 @@ A static organization onboarding site built with Vite + React 18 + TypeScript. D
 
 ## Layout
 
-**Pattern:** Fixed sidebar + scrollable content panel.
+**Pattern:** Fixed sidebar + scrollable content panel, shared across all pages via a root layout route.
 
+- `RootLayout` wraps every page — renders the sidebar and the `<Outlet>` for page content
+- Each page is a React Router route; adding a new page means adding a new route and a new `pages/` component
 - Sidebar is fixed on the left, full viewport height
 - Content area fills the remaining space and scrolls independently
-- Active section is tracked in `App.tsx` via `useState<SectionId>`
-- Clicking a sidebar item updates state; the corresponding section component renders in the content panel
+- Within a page, active section is tracked via URL hash (`/git-workflow#branching-strategy`) so sections are deep-linkable
 - On mobile, the sidebar collapses to a hamburger menu (Sheet from shadcn)
 
 ---
@@ -43,9 +45,9 @@ A static organization onboarding site built with Vite + React 18 + TypeScript. D
 src/
   components/
     layout/
-      Shell.tsx             # Outer layout: sidebar + content area
-      Sidebar.tsx           # Nav list with active state + ThemeToggle
-    sections/
+      RootLayout.tsx        # Root route layout: sidebar + <Outlet>
+      Sidebar.tsx           # Nav list (pages + sections) + ThemeToggle
+    sections/               # Section components scoped to the git-workflow page
       QuickStart.tsx
       BranchingStrategy.tsx
       CommitMessageFormat.tsx
@@ -55,10 +57,15 @@ src/
       Troubleshooting.tsx
     ui/                     # shadcn-generated components (do not edit manually)
     CodeBlock.tsx           # <pre> wrapper styled with Flexoki ink/paper tokens
-  App.tsx                   # Active section state, renders Shell
-  main.tsx
+  pages/
+    GitWorkflow.tsx         # Renders all git workflow sections; adding a page = new file here + new route
+  routes/
+    index.tsx               # React Router route definitions
+  main.tsx                  # Router provider setup
   index.css                 # Flexoki theme tokens + shadcn CSS variable overrides
 ```
+
+Adding a new page in future: create `pages/NewPage.tsx`, add a route in `routes/index.tsx`, add a nav entry in `Sidebar.tsx`.
 
 ---
 
@@ -80,11 +87,11 @@ Each section is a self-contained React component. Content is hardcoded in JSX us
 
 ## Components
 
-### `Shell.tsx`
-Renders the two-column layout. Accepts `activeSection` and `onSectionChange` as props. On mobile, wraps sidebar in a shadcn `Sheet`.
+### `RootLayout.tsx`
+Root route component. Renders the two-column layout — sidebar on the left, `<Outlet>` on the right. On mobile, wraps sidebar in a shadcn `Sheet`. No props; layout is always present.
 
 ### `Sidebar.tsx`
-Renders the section list. Each item is a button — active item gets Flexoki primary highlight. Includes `ThemeToggle` at the bottom (sun/moon icon, toggles `dark` class on `<html>`).
+Renders two levels of navigation: top-level page links (e.g. "Git Workflow") and, when on a page, its section anchor links. Uses React Router `NavLink` for page links (active styling automatic) and plain anchor `href="#section-id"` for in-page sections. Includes `ThemeToggle` at the bottom (sun/moon icon, toggles `dark` class on `<html>`).
 
 ### `CodeBlock.tsx`
 A styled `<pre><code>` block. Uses Flexoki `--muted` background, monospace font, horizontal scroll for long lines. Includes a copy-to-clipboard button (lucide `Copy` icon).
@@ -129,7 +136,7 @@ Theme toggle persists preference to `localStorage` and applies the `dark` class 
 - Components are function components only
 - `layout/` components use named exports; `sections/` components use default exports (convention for route-like components); `ui/` follows shadcn's own generated conventions
 - `cn()` utility from `lib/utils.ts` for conditional class merging
-- No state management library — `useState` in `App.tsx` is sufficient
+- No state management library — React Router handles page state; `useState` only for UI interactions (mobile menu open/close, theme)
 - Tailwind classes only — no inline styles, no CSS modules
 
 ---
