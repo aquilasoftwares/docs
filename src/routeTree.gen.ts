@@ -9,8 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as GitWorkflowRouteImport } from './routes/git-workflow'
 import { Route as IndexRouteImport } from './routes/index'
 
+const GitWorkflowRoute = GitWorkflowRouteImport.update({
+  id: '/git-workflow',
+  path: '/git-workflow',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +25,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/git-workflow': typeof GitWorkflowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/git-workflow': typeof GitWorkflowRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/git-workflow': typeof GitWorkflowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/git-workflow'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/git-workflow'
+  id: '__root__' | '/' | '/git-workflow'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GitWorkflowRoute: typeof GitWorkflowRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/git-workflow': {
+      id: '/git-workflow'
+      path: '/git-workflow'
+      fullPath: '/git-workflow'
+      preLoaderRoute: typeof GitWorkflowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GitWorkflowRoute: GitWorkflowRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
