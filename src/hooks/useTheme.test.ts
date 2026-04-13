@@ -16,6 +16,7 @@ it('reads saved theme from localStorage', () => {
   localStorage.setItem('theme', 'dark')
   const { result } = renderHook(() => useTheme())
   expect(result.current.theme).toBe('dark')
+  expect(document.documentElement.classList.contains('dark')).toBe(true)
 })
 
 it('toggle switches from light to dark', () => {

@@ -9,7 +9,9 @@ interface UseThemeReturn {
 
 export function useTheme(): UseThemeReturn {
   const [theme, setTheme] = useState<Theme>(() => {
-    return (localStorage.getItem('theme') as Theme) ?? 'light'
+    if (typeof window === 'undefined') return 'light'
+    const saved = localStorage.getItem('theme')
+    return (saved === 'dark' || saved === 'light') ? saved : 'light'
   })
 
   useEffect(() => {

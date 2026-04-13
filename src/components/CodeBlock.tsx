@@ -1,21 +1,28 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface CodeBlockProps {
   code: string
-  language?: string
   className?: string
 }
 
 export default function CodeBlock({ code, className }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
+  }, [])
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(code)
+    if (timerRef.current) clearTimeout(timerRef.current)
     setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    timerRef.current = setTimeout(() => setCopied(false), 2000)
   }
 
   return (
@@ -23,9 +30,9 @@ export default function CodeBlock({ code, className }: CodeBlockProps) {
       <Button
         variant="ghost"
         size="icon"
-        aria-label="copy"
+        aria-label={copied ? 'copied' : 'copy'}
         onClick={handleCopy}
-        className="absolute top-2 right-2 h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute top-2 right-2 h-7 w-7 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
       >
         {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </Button>
