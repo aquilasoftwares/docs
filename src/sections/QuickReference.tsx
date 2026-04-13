@@ -75,8 +75,8 @@ git blame <file>                    # See who changed each line`} />
         <CardHeader><CardTitle>Full Gitmoji List</CardTitle></CardHeader>
         <CardContent>
           <Collapsible>
-            <CollapsibleTrigger className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              <ChevronDown className="h-4 w-4" />
+            <CollapsibleTrigger className="group flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
               Click to expand full list
             </CollapsibleTrigger>
             <CollapsibleContent className="mt-3">

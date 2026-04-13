@@ -1,9 +1,14 @@
+import type { ReactNode } from 'react'
 import { Square } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import CodeBlock from '@/components/CodeBlock'
 
-function CheckItem({ children }: { children: React.ReactNode }) {
+interface CheckItemProps {
+  children: ReactNode
+}
+
+function CheckItem({ children }: CheckItemProps) {
   return (
     <li className="flex items-start gap-2 text-sm">
       <Square className="h-4 w-4 shrink-0 mt-0.5 text-muted-foreground" />
