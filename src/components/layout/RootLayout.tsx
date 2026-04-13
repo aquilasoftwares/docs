@@ -33,7 +33,7 @@ export function RootLayout({ children }: RootLayoutProps) {
               <Sidebar />
             </SheetContent>
           </Sheet>
-          <span className="font-semibold text-sm">Aquila Onboarding</span>
+          <span className="font-semibold text-sm">Aquila Coding</span>
         </header>
 
         <main className="flex-1 overflow-y-auto">

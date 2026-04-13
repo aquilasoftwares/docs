@@ -40,9 +40,11 @@ export function Sidebar() {
   return (
     <aside className="flex flex-col w-64 h-screen border-r border-border bg-card shrink-0">
       <div className="p-4 border-b border-border">
-        <h2 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">
-          Aquila Onboarding
-        </h2>
+        <img
+          src="/aquila_logo_name.png"
+          alt="Aquila"
+          className="h-6 w-auto dark:invert"
+        />
       </div>
 
       <nav className="flex-1 overflow-y-auto p-3 space-y-1">
