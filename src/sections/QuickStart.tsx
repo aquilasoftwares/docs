@@ -22,11 +22,11 @@ export default function QuickStart() {
         </CardHeader>
         <CardContent>
           <CodeBlock
-            code={`1. Branch from main       →  git checkout -b feature/my-feature
-2. Make changes & commit  →  git commit -m "✨ feat: add feature"
-3. Push to remote         →  git push origin feature/my-feature
-4. Create PR to staging   →  Review & merge via GitHub/GitLab
-5. After testing          →  Merge staging → main`}
+            code={`1. Sync with main         →  git checkout main && git pull origin main
+2. Branch from main       →  git checkout -b feature/my-feature
+3. Make changes & commit  →  git commit -m "✨ feat: add feature"
+4. Push to remote         →  git push origin feature/my-feature
+5. Create PR to staging   →  Review & merge via GitHub/GitLab`}
           />
         </CardContent>
       </Card>
@@ -40,9 +40,10 @@ export default function QuickStart() {
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex items-center gap-3">
-            <Badge variant="destructive" className="shrink-0">Never</Badge>
+            <Badge className="shrink-0">Always</Badge>
             <span className="text-sm">
-              commit directly to <code className="bg-muted px-1 rounded text-xs">main</code> or{' '}
+              commit to feature/bugfix/hotfix branches — never directly to{' '}
+              <code className="bg-muted px-1 rounded text-xs">main</code> or{' '}
               <code className="bg-muted px-1 rounded text-xs">staging</code>
             </span>
           </div>

@@ -94,19 +94,6 @@ Closes #123`} />
         </Card>
       </div>
 
-      <Card>
-        <CardHeader><CardTitle>Review Checklist</CardTitle></CardHeader>
-        <CardContent>
-          <ul className="space-y-2">
-            <CheckItem>Code logic is sound and efficient</CheckItem>
-            <CheckItem>No security vulnerabilities introduced</CheckItem>
-            <CheckItem>Error handling is appropriate</CheckItem>
-            <CheckItem>Tests cover edge cases</CheckItem>
-            <CheckItem>Code follows project style guide</CheckItem>
-            <CheckItem>No hardcoded credentials or sensitive data</CheckItem>
-          </ul>
-        </CardContent>
-      </Card>
     </section>
   )
 }

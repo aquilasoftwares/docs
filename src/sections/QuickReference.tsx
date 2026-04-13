@@ -97,6 +97,7 @@ git blame <file>                    # See who changed each line`} />
                   <TableRow><TableCell className="font-medium">Fixes</TableCell><TableCell>🐛</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:bug:</code></TableCell><TableCell>Bug fix</TableCell></TableRow>
                   <TableRow><TableCell></TableCell><TableCell>🚑</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:ambulance:</code></TableCell><TableCell>Critical hotfix</TableCell></TableRow>
                   <TableRow><TableCell></TableCell><TableCell>🔒</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:lock:</code></TableCell><TableCell>Security fix</TableCell></TableRow>
+                  <TableRow><TableCell></TableCell><TableCell>🔐</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:closed_lock_with_key:</code></TableCell><TableCell>Add or update secrets</TableCell></TableRow>
                   <TableRow><TableCell></TableCell><TableCell>🩹</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:adhesive_bandage:</code></TableCell><TableCell>Simple fix</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">Documentation</TableCell><TableCell>📝</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:memo:</code></TableCell><TableCell>Add/update docs</TableCell></TableRow>
                   <TableRow><TableCell></TableCell><TableCell>💡</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:bulb:</code></TableCell><TableCell>Add/update comments</TableCell></TableRow>
@@ -119,6 +120,7 @@ git blame <file>                    # See who changed each line`} />
                   <TableRow><TableCell></TableCell><TableCell>✏️</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:pencil2:</code></TableCell><TableCell>Fix typos</TableCell></TableRow>
                   <TableRow><TableCell></TableCell><TableCell>🔊</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:loud_sound:</code></TableCell><TableCell>Add/update logs</TableCell></TableRow>
                   <TableRow><TableCell></TableCell><TableCell>🔇</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:mute:</code></TableCell><TableCell>Remove logs</TableCell></TableRow>
+                  <TableRow><TableCell></TableCell><TableCell>🏗️</TableCell><TableCell><code className="bg-muted px-1 rounded text-xs font-mono">:building_construction:</code></TableCell><TableCell>Architectural changes</TableCell></TableRow>
                 </TableBody>
               </Table>
             </CollapsibleContent>
