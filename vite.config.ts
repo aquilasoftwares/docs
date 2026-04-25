@@ -1,14 +1,14 @@
 import path from 'path'
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
-import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
   base: '/docs/',
   plugins: [
     react(),
-    TanStackRouterVite(),
+    tanstackRouter(),
   ],
   resolve: {
     alias: {
