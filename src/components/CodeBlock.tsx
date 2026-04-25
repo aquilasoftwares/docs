@@ -26,17 +26,17 @@ export default function CodeBlock({ code, className }: CodeBlockProps) {
   }
 
   return (
-    <div className={cn('relative group rounded-md bg-muted', className)}>
+    <div className={cn('relative group rounded-lg bg-zinc-950 border border-zinc-800', className)}>
       <Button
         variant="ghost"
         size="icon"
         aria-label={copied ? 'copied' : 'copy'}
         onClick={handleCopy}
-        className="absolute top-2 right-2 h-7 w-7 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+        className="absolute top-2 right-2 h-7 w-7 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
       >
-        {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+        {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
       </Button>
-      <pre className="overflow-x-auto p-4 text-sm font-mono">
+      <pre className="overflow-x-auto p-4 text-sm font-mono text-zinc-300 leading-relaxed">
         <code>{code}</code>
       </pre>
     </div>

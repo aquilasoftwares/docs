@@ -20,7 +20,7 @@ export function RootLayout({ children }: RootLayoutProps) {
 
       {/* Mobile header + content */}
       <div className="flex flex-col flex-1 min-w-0">
-        <header className="flex md:hidden items-center gap-2 px-4 py-3 border-b border-border">
+        <header className="flex md:hidden items-center gap-2 px-4 py-3 border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-10">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               render={
@@ -33,7 +33,7 @@ export function RootLayout({ children }: RootLayoutProps) {
               <Sidebar />
             </SheetContent>
           </Sheet>
-          <span className="font-semibold text-sm">Aquila Coding</span>
+          <span className="font-semibold text-sm tracking-tight">Aquila Coding</span>
         </header>
 
         <main className="flex-1 overflow-y-auto">
