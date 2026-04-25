@@ -41,7 +41,7 @@ export function Sidebar() {
     <aside className="flex flex-col w-64 h-screen border-r border-border bg-card shrink-0">
       <div className="p-4 border-b border-border">
         <img
-          src="/aquila_logo_name.png"
+          src={`${import.meta.env.BASE_URL}aquila_logo_name.png`}
           alt="Aquila"
           className="h-6 w-auto dark:invert"
         />
