@@ -1,5 +1,5 @@
 import { Link, useLocation } from '@tanstack/react-router'
-import { Sun, Moon, GitBranch } from 'lucide-react'
+import { Sun, Moon, GitBranch, BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/hooks/useTheme'
@@ -29,6 +29,22 @@ const PAGES: PageItem[] = [
       { id: 'pull-request-process', label: 'Pull Request Process' },
       { id: 'quick-reference', label: 'Quick Reference' },
       { id: 'troubleshooting', label: 'Troubleshooting' },
+    ],
+  },
+  {
+    label: 'Developer Onboarding',
+    to: '/onboarding',
+    icon: <BookOpen className="h-4 w-4" />,
+    sections: [
+      { id: 'overview', label: 'Overview' },
+      { id: 'prerequisites', label: 'Prerequisites' },
+      { id: 'install-postgresql', label: 'Install PostgreSQL' },
+      { id: 'your-token', label: 'Your Token' },
+      { id: 'first-day-setup', label: 'First-Day Setup' },
+      { id: 'running-the-project', label: 'Running the Project' },
+      { id: 'daily-workflow', label: 'Daily Workflow' },
+      { id: 'migrations', label: 'Migrations' },
+      { id: 'onboarding-quick-reference', label: 'Quick Reference' },
     ],
   },
 ]
