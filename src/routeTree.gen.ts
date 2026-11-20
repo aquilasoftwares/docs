@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as GitWorkflowRouteImport } from './routes/git-workflow'
+import { Route as GatewayClientRouteImport } from './routes/gateway-client'
+import { Route as GatewayAdminRouteImport } from './routes/gateway-admin'
 import { Route as IndexRouteImport } from './routes/index'
 
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -23,6 +25,16 @@ const GitWorkflowRoute = GitWorkflowRouteImport.update({
   path: '/git-workflow',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GatewayClientRoute = GatewayClientRouteImport.update({
+  id: '/gateway-client',
+  path: '/gateway-client',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GatewayAdminRoute = GatewayAdminRouteImport.update({
+  id: '/gateway-admin',
+  path: '/gateway-admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +43,54 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/gateway-admin': typeof GatewayAdminRoute
+  '/gateway-client': typeof GatewayClientRoute
   '/git-workflow': typeof GitWorkflowRoute
   '/onboarding': typeof OnboardingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/gateway-admin': typeof GatewayAdminRoute
+  '/gateway-client': typeof GatewayClientRoute
   '/git-workflow': typeof GitWorkflowRoute
   '/onboarding': typeof OnboardingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/gateway-admin': typeof GatewayAdminRoute
+  '/gateway-client': typeof GatewayClientRoute
   '/git-workflow': typeof GitWorkflowRoute
   '/onboarding': typeof OnboardingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/git-workflow' | '/onboarding'
+  fullPaths:
+    | '/'
+    | '/gateway-admin'
+    | '/gateway-client'
+    | '/git-workflow'
+    | '/onboarding'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/git-workflow' | '/onboarding'
-  id: '__root__' | '/' | '/git-workflow' | '/onboarding'
+  to:
+    | '/'
+    | '/gateway-admin'
+    | '/gateway-client'
+    | '/git-workflow'
+    | '/onboarding'
+  id:
+    | '__root__'
+    | '/'
+    | '/gateway-admin'
+    | '/gateway-client'
+    | '/git-workflow'
+    | '/onboarding'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GatewayAdminRoute: typeof GatewayAdminRoute
+  GatewayClientRoute: typeof GatewayClientRoute
   GitWorkflowRoute: typeof GitWorkflowRoute
   OnboardingRoute: typeof OnboardingRoute
 }
@@ -75,6 +111,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GitWorkflowRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gateway-client': {
+      id: '/gateway-client'
+      path: '/gateway-client'
+      fullPath: '/gateway-client'
+      preLoaderRoute: typeof GatewayClientRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gateway-admin': {
+      id: '/gateway-admin'
+      path: '/gateway-admin'
+      fullPath: '/gateway-admin'
+      preLoaderRoute: typeof GatewayAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +137,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GatewayAdminRoute: GatewayAdminRoute,
+  GatewayClientRoute: GatewayClientRoute,
   GitWorkflowRoute: GitWorkflowRoute,
   OnboardingRoute: OnboardingRoute,
 }
