@@ -1,5 +1,5 @@
 import { Link, useLocation } from '@tanstack/react-router'
-import { Sun, Moon, GitBranch, BookOpen } from 'lucide-react'
+import { Sun, Moon, GitBranch, BookOpen, CreditCard, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/hooks/useTheme'
@@ -14,9 +14,42 @@ interface PageItem {
   to: string
   icon: React.ReactNode
   sections: SectionItem[]
+  group?: string
 }
 
 const PAGES: PageItem[] = [
+  {
+    label: 'Client Guide',
+    group: 'AQPay Guide',
+    to: '/gateway-client',
+    icon: <CreditCard className="h-4 w-4" />,
+    sections: [
+      { id: 'client-overview', label: 'Overview' },
+      { id: 'client-getting-started', label: 'Getting Started' },
+      { id: 'client-create-transaction', label: 'Create a Transaction' },
+      { id: 'client-card-payments', label: 'Card Payments' },
+      { id: 'client-status', label: 'Transaction Status' },
+      { id: 'client-callbacks', label: 'Callbacks (Webhooks)' },
+      { id: 'client-payouts', label: 'Payouts and Balance' },
+      { id: 'client-portal', label: 'Merchant Portal' },
+      { id: 'client-go-live', label: 'Errors and Go-Live' },
+    ],
+  },
+  {
+    label: 'Admin Guide',
+    group: 'AQPay Guide',
+    to: '/gateway-admin',
+    icon: <ShieldCheck className="h-4 w-4" />,
+    sections: [
+      { id: 'admin-overview', label: 'Overview' },
+      { id: 'admin-onboarding-client', label: 'Onboarding a Client' },
+      { id: 'admin-payment-routes', label: 'Payment Routes' },
+      { id: 'admin-transactions', label: 'Monitoring Transactions' },
+      { id: 'admin-provider-webhooks', label: 'Provider Webhooks' },
+      { id: 'admin-reports-payouts', label: 'Reports and Reconciliation' },
+      { id: 'admin-runbook', label: 'Support Runbook' },
+    ],
+  },
   {
     label: 'Git Workflow',
     to: '/git-workflow',
@@ -64,14 +97,22 @@ export function Sidebar() {
       </div>
 
       <nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
-        {PAGES.map(page => {
+        {PAGES.map((page, i) => {
           const isActive = pathname === page.to
+          const showGroup = page.group && page.group !== PAGES[i - 1]?.group
           return (
             <div key={page.to}>
+              {showGroup && (
+                <div className="flex items-center gap-2.5 px-3 pt-1 pb-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground/70">
+                  <CreditCard className="h-4 w-4" />
+                  {page.group}
+                </div>
+              )}
               <Link
                 to={page.to}
                 className={cn(
                   'flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors w-full',
+                  page.group && 'ml-3 w-[calc(100%-0.75rem)]',
                   isActive
                     ? 'bg-primary/10 text-primary'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/60',
